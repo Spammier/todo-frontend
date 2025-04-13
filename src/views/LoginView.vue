@@ -1,17 +1,18 @@
 <template>
-  <div class="login-view">
-    <div class="card">
-      <h2>登录</h2>
+  <div class="login-container">
+    <div class="login-card card">
+      <h2 class="title">登录</h2>
+      
       <form @submit.prevent="handleLogin">
         <div v-if="error" class="error-message">{{ error }}</div>
         
         <div class="form-group">
-          <label for="username">用户名</label>
+          <label for="username">账号</label>
           <input 
             id="username"
             v-model="username"
             type="text"
-            placeholder="请输入用户名"
+            placeholder="请输入账号"
             required
           />
         </div>
@@ -28,10 +29,10 @@
         </div>
         
         <div class="form-actions">
-          <button type="submit" :disabled="loading">
+          <button type="submit" class="login-button" :disabled="loading">
             {{ loading ? '登录中...' : '登录' }}
           </button>
-          <div class="register-link">
+          <div class="register-prompt">
             还没有账号？ <router-link to="/register">注册</router-link>
           </div>
         </div>
@@ -89,50 +90,69 @@ export default {
 </script>
 
 <style scoped>
-.login-view {
-  max-width: 400px;
-  margin: 40px auto;
+.login-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-h2 {
+.login-card {
+  width: 100%;
+  max-width: 420px; /* 调整卡片最大宽度 */
+  padding: 40px; /* 增加内边距 */
+}
+
+.title {
   text-align: center;
-  margin-bottom: 20px;
-  color: #333;
+  margin-bottom: 30px; /* 增加标题下方间距 */
+  color: var(--dark-text-primary);
+  font-size: 24px; /* 调整字体大小 */
+  font-weight: 600;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* 增加表单组间距 */
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px; /* 增加标签下方间距 */
+  font-weight: 500;
+  font-size: 14px; /* 调整标签字体大小 */
+  color: var(--dark-text-secondary);
+}
+
+input {
+  /* 使用新颜色 */
+  background-color: var(--dark-bg-tertiary); 
+  border-color: var(--dark-border-color);
 }
 
 .form-actions {
-  margin-top: 20px;
+  margin-top: 30px; 
+  display: flex; /* 改回 flex */
+  justify-content: space-between; /* 两端对齐 */
+  align-items: center; /* 垂直居中 */
 }
 
-.register-link {
-  margin-top: 15px;
-  text-align: center;
+.login-button {
+  /* 移除 width: 100% */
+  padding: 10px 30px; /* 根据需要调整按钮大小 */
 }
 
-.register-link a {
-  color: #4CAF50;
-  text-decoration: none;
+.register-prompt {
+  margin-top: 0; /* 移除上方间距 */
+  text-align: right; /* 右对齐 */
 }
 
-.register-link a:hover {
-  text-decoration: underline;
+.register-prompt a {
+  color: var(--accent-color); /* 确保链接是绿色 */
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #c62828;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
+  background-color: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
 }
 </style> 
