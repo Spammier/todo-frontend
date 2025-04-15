@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 
-// 配置axios默认URL和拦截器
-axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL || 'http://localhost:8080/api'
+// 配置axios默认URL为相对路径 /api，以便开发服务器代理能够拦截
+axios.defaults.baseURL = '/api' 
 
 // 请求拦截器 - 添加token到请求头
 axios.interceptors.request.use(config => {
@@ -21,8 +21,11 @@ axios.interceptors.response.use(
   response => response,
   error => {
     if (error.response && error.response.status === 401) {
-      store.dispatch('logout')
-      router.push('/login')
+      // 检查是否在登录页，避免无限循环
+      if (router.currentRoute.value.name !== 'login') {
+        store.dispatch('logout')
+        router.push('/login')
+      }
     }
     return Promise.reject(error)
   }

@@ -5,7 +5,6 @@ module.exports = {
       '/api': {
         target: process.env.VUE_APP_API_PROXY_TARGET || 'http://localhost:8080',
         changeOrigin: true,
-        pathRewrite: { '^/api': '' },
       }
     },
     client: {
