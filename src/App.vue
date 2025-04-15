@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="{ 'dark-theme': true }">
     <header v-if="!isLoggedIn" class="main-header">
-      <h1 class="logo">DoIt</h1>
+      <img src="/logo.png" alt="DoIt Logo" class="logo-image">
     </header>
     <nav v-if="isLoggedIn && !isAuthRoute" class="navbar">
       <div class="container">
@@ -97,7 +97,7 @@ body {
 }
 
 .main-header {
-  padding: 20px 30px;
+  padding: 25px 40px; /* 增加上下左右 padding 以适应更大的 logo */
   position: absolute;
   top: 0;
   left: 0;
@@ -106,11 +106,9 @@ body {
   box-sizing: border-box;
 }
 
-.logo {
-  font-size: 1.8rem;
-  color: var(--dark-text-primary);
-  font-weight: 600;
-  margin: 0;
+.logo-image {
+  height: 100px; /* 将高度增加到 100px */
+  display: block;
 }
 
 .navbar {
